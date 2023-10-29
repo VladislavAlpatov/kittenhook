@@ -10,7 +10,8 @@
 #include <fstream>
 #include <sys/uio.h>
 #include <format>
-#include "source_location"
+#include <source_location>
+#include <regex>
 
 namespace memory_manager
 {
@@ -92,6 +93,17 @@ namespace memory_manager
         {
             if (!line.ends_with(moduleName))
                 continue;
+
+            const std::regex pattern(R"(\b([0-9a-fA-F]+)\b)");
+
+            std::smatch match;
+
+            if (!std::regex_search(line, match, pattern))
+                return std::nullopt;
+
+            std::string extractedNumber = match[1].str();
+
+            return std::stoull(extractedNumber, nullptr,16);
         }
 
         return std::nullopt;

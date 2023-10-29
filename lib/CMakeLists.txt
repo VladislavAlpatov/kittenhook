@@ -1,1 +1,3 @@
 add_subdirectory(memory_manager)
+add_subdirectory(apex_sdk)
+add_subdirectory(uml)

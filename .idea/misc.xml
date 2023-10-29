@@ -6,5 +6,12 @@
       <file path="$PROJECT_DIR$/lib" />
       <file path="$PROJECT_DIR$/source" />
     </sourceRoots>
+    <libraryRoots>
+      <file path="$PROJECT_DIR$/extlib/GLFW3" />
+      <file path="$PROJECT_DIR$/extlib/GLFW3/include" />
+    </libraryRoots>
+    <excludeRoots>
+      <file path="$PROJECT_DIR$/extlib/GLFW3/lib" />
+    </excludeRoots>
   </component>
 </project>

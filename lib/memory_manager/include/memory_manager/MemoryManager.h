@@ -12,7 +12,7 @@
 namespace memory_manager
 {
 
-    class MemoryManager final
+    class MemoryManager
     {
     public:
         explicit MemoryManager(const std::string& procName);
