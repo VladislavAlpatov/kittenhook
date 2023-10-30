@@ -8,7 +8,7 @@
 #include <cstdint>
 #include <optional>
 #include <uml/Vector3.h>
-
+#include "apex_sdk/Weapon.h"
 namespace apex_sdk
 {
     class BaseEntity
@@ -20,7 +20,7 @@ namespace apex_sdk
 
         [[nodiscard]] int GetSheildValue() const;
 
-        // [[nodiscard]] std::optional<Weapon> GetActiveWeapon() const;
+        [[nodiscard]] std::optional<Weapon> GetActiveWeapon() const;
 
         [[nodiscard]] uml::Vector3 GetOrigin() const;
 
@@ -31,7 +31,7 @@ namespace apex_sdk
         [[nodiscard]] bool IsAlive() const;
 
         [[nodiscard]] bool IsKnockedout() const;
-
+        void SetViewAngles(const uml::Vector3 & other);
         [[nodiscard]] uml::Vector3 GetBonePosition(int iBone) const;
         [[nodiscard]] uml::Vector3 GetCameraPosition() const;
         [[nodiscard]] uml::Vector3 GetViewAngles() const;
@@ -40,7 +40,7 @@ namespace apex_sdk
         [[nodiscard]] uml::Vector3 GetAimPunch() const;
 
         int GetFlags() const;
-
+        bool operator==(const apex_sdk::BaseEntity& other) const {return m_pHandle == other.m_pHandle;}
     private:
         uintptr_t m_pHandle = 0;
     };

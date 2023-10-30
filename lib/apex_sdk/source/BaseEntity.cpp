@@ -5,7 +5,7 @@
 #include "apex_sdk/BaseEntity.h"
 #include "apex_sdk/MemoryManagerSinglton.h"
 #include "apex_sdk/Offsets.h"
-
+#include "apex_sdk/EntityList.h"
 namespace apex_sdk
 {
     int BaseEntity::GetHealth() const
@@ -25,7 +25,7 @@ namespace apex_sdk
 
     float BaseEntity::LastVisibleTime() const
     {
-        return 0;
+        return Memory::Get().ReadMemory<float>(m_pHandle+OFFSET_VISIBLE_TIME).value();
     }
 
     uml::Vector3 BaseEntity::GetBonePosition(int iBone) const
@@ -57,5 +57,34 @@ namespace apex_sdk
     bool BaseEntity::IsKnockedout() const
     {
         return Memory::Get().ReadMemory<bool>(m_pHandle + OFFSET_BLEED_OUT_STATE).value();
+    }
+
+    void BaseEntity::SetViewAngles(const uml::Vector3 &other)
+    {
+        if (other.x > 89 or other.x < -89 or other.y > 180 or other.y < -180)
+            return;
+
+        Memory::Get().WriteMemory<uml::Vector3>(m_pHandle + OFFSET_VIEWANGLES, other);
+    }
+
+    uml::Vector3 BaseEntity::GetCameraPosition() const
+    {
+        return Memory::Get().ReadMemory<uml::Vector3>(m_pHandle + OFFSET_CAMERAPOS).value();
+    }
+
+    uml::Vector3 BaseEntity::GetViewAngles() const
+    {
+        return Memory::Get().ReadMemory<uml::Vector3>(m_pHandle + OFFSET_VIEWANGLES).value();
+    }
+
+    std::optional<Weapon> BaseEntity::GetActiveWeapon() const
+    {
+        uintptr_t actWeaponID = Memory::Get().ReadMemory<uintptr_t>(m_pHandle + OFFSET_WEAPON).value() & 0xFFFF;
+        auto currentWeapon = EntityList::GetEntity(actWeaponID);
+
+        if (!currentWeapon)
+            return std::nullopt;
+
+        return Weapon(currentWeapon->m_pHandle);
     }
 }

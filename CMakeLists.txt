@@ -7,7 +7,7 @@ add_executable(kittenhook source/main.cpp)
 
 add_subdirectory(lib)
 add_subdirectory(extlib)
-
+add_subdirectory(source)
 target_include_directories(kittenhook PRIVATE extlib/GLFW3/include)
 target_link_directories(kittenhook PRIVATE extlib/GLFW3/lib)
 
@@ -20,3 +20,6 @@ target_link_libraries(kittenhook PRIVATE uml)
 
 find_package(OpenGL REQUIRED)
 target_link_libraries(kittenhook PRIVATE ${OPENGL_LIBRARIES})
+
+find_package(X11 REQUIRED)
+target_link_libraries(kittenhook PRIVATE ${X11_LIBRARIES})
