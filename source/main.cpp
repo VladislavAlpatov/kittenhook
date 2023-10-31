@@ -10,6 +10,39 @@
 #include <apex_sdk/WorldToScreen.h>
 #include <format>
 #include "hacks/Aimbot.h"
+#include <X11/Xlib.h>
+#include <X11/keysym.h>
+
+bool IsInsertPressed() {
+    static Display* display = nullptr;
+    static Window root;
+    static bool prevInsertState = false;  // Keeps track of the previous state
+
+    if (display == nullptr) {
+        display = XOpenDisplay(NULL);
+        if (display == NULL) {
+            return false;
+        }
+        root = DefaultRootWindow(display);
+    }
+
+    // Check Insert key
+    char keys_return[32];
+    XQueryKeymap(display, keys_return);
+    KeyCode kc = XKeysymToKeycode(display, XK_Insert);
+    bool insertPressed = !!(keys_return[kc >> 3] & (1 << (kc & 7)));
+
+    // Detect the transition from not-pressed to pressed
+    bool pressedNow = false;
+    if (insertPressed && !prevInsertState) {
+        pressedNow = true;
+    }
+
+    // Update the previous state
+    prevInsertState = insertPressed;
+
+    return pressedNow;
+}
 
 int main()
 {
@@ -40,7 +73,7 @@ int main()
 
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
-
+    static bool showMenu = false;
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
@@ -50,6 +83,18 @@ int main()
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+
+        if (IsInsertPressed())
+        {
+            showMenu = !showMenu;
+            glfwSetWindowAttrib(window, GLFW_MOUSE_PASSTHROUGH, !glfwGetWindowAttrib(window, GLFW_MOUSE_PASSTHROUGH));
+        }
+
+        if (showMenu)
+        {
+            ImGui::Begin("kittenhook");
+            ImGui::End();
+        }
 
         auto localPlayer = apex_sdk::EntityList::GetLocalPlayer();
         if (localPlayer.has_value())
