@@ -36,13 +36,18 @@ namespace apex_sdk
 
     std::vector<BaseEntity> EntityList::GetAllEntities()
     {
+        const auto localPlayer = EntityList::GetLocalPlayer();
+
+        if (!localPlayer)
+            return {};
+
         std::vector<BaseEntity> entities;
 
-        for (int i = 0; i < 130; i++)
+        for (int i = 0; i < 200; i++)
         {
             auto ent = GetEntity(i);
 
-            if (ent)
+            if (ent and ent->GetVtable() == localPlayer->GetVtable())
                 entities.push_back(ent.value());
         }
 

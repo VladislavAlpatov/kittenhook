@@ -5,6 +5,8 @@
 
 #include <uml/Vector3.h>
 #include <cmath>
+#include <uml/angles.h>
+
 
 namespace uml
 {
@@ -195,5 +197,18 @@ namespace uml
     float Vector3::Sum2D() const
     {
         return x + y;
+    }
+
+    Vector3 Vector3::ViewAngleTo(const Vector3 &other) const
+    {
+        const float distance = DistTo(other);
+        const auto delta = other - *this;
+
+        // Make x negative since -89 is top and 89 is bottom
+        return {
+            -angles::RadToDeg(asinf((delta.z) / distance)),
+            angles::RadToDeg(atan2f(delta.y, delta.x)),
+            0.f
+        };
     }
 }

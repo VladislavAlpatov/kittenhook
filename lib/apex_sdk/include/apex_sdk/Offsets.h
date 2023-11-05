@@ -25,7 +25,7 @@
 #define OFFSET_VISIBLE_TIME 0x19C0 //CPlayer!lastVisibleTime
 
 #define OFFSET_LIFE_STATE 0x06c8 //m_lifeState, >0 = dead
-#define OFFSET_BLEED_OUT_STATE 0x2714 //m_bleedoutState, >0 = knocked
+#define OFFSET_BLEED_OUT_STATE 0x2710 //m_bleedoutState, >0 = knocked
 
 #define OFFSET_ORIGIN 0x017c //m_vecAbsOrigin - 3rd offset after the first int and vector
 #define OFFSET_BONES 0x0dd0 + 0x48 //m_nForceBone + 0x48

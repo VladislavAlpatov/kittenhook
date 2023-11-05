@@ -19,6 +19,7 @@ namespace apex_sdk
         [[nodiscard]] int GetHealth() const;
 
         [[nodiscard]] int GetSheildValue() const;
+        [[nodiscard]] uintptr_t GetVtable() const;
 
         [[nodiscard]] std::optional<Weapon> GetActiveWeapon() const;
 

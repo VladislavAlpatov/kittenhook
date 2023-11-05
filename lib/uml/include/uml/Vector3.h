@@ -50,5 +50,6 @@ namespace uml
         [[nodiscard]] Vector3 Transform(const Vector3& angles, float length) const;
         [[nodiscard]] float  Sum() const;
         [[nodiscard]] float  Sum2D() const;
+        [[nodiscard]] Vector3 ViewAngleTo(const Vector3& other) const;
     };
 }

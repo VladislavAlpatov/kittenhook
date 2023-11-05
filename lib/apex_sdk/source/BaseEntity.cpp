@@ -53,8 +53,7 @@ namespace apex_sdk
     {
         const auto health = GetHealth();
 
-        return !Memory::Get().ReadMemory<bool>(m_pHandle+OFFSET_LIFE_STATE).value() and health > 0
-        and health <= 100;
+        return !Memory::Get().ReadMemory<bool>(m_pHandle+OFFSET_LIFE_STATE).value() and health > 0 and health <= 100;
     }
 
     bool BaseEntity::IsKnockedout() const
@@ -89,5 +88,10 @@ namespace apex_sdk
             return std::nullopt;
 
         return Weapon(currentWeapon->m_pHandle);
+    }
+
+    uintptr_t BaseEntity::GetVtable() const
+    {
+        return Memory::Get().ReadMemory<uintptr_t>(m_pHandle).value();
     }
 }

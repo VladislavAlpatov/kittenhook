@@ -35,32 +35,10 @@ bool isRightButtonPressed() {
 }
 
 
-float RadToDeg(const float rads)
-{
-    return rads * 180.f / 3.1415926535f;
-}
-
-float DegToRad(const float degrees)
-{
-    return degrees * 3.1415926535f / 180.f;
-}
-
-uml::Vector3 CalcAimViewAngles(const uml::Vector3& origin, const uml::Vector3& target)
-{
-    uml::Vector3 out;
-    const float distance = origin.DistTo(target);
-
-    // Make x negative since -89 is top and 89 is bottom
-    out.x = -RadToDeg(asinf((target.z - origin.z) / distance));
-    out.y =  RadToDeg(atan2f(target.y - origin.y, target.x - origin.x));
-
-    return out;
-}
-
 namespace hacks
 {
     float Aimbot::m_fFov = 5.f;
-    float Aimbot::m_fSmooth = 10.f;
+    float Aimbot::m_fSmooth = 1.f;
 
     void Aimbot::Run()
     {
@@ -75,12 +53,12 @@ namespace hacks
         if (!target or !local)
             return;
 
-        auto aimAngles = CalcAimViewAngles(local->GetCameraPosition(), target->GetBonePosition(5));
+        auto aimAngles = local->GetCameraPosition().ViewAngleTo(target->GetBonePosition(5));
 
         if (local->GetViewAngles().DistTo(aimAngles) > m_fFov)
             return;
         const auto delta = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - start).count() / 1000.f;
-        aimAngles = local->GetViewAngles() + ((aimAngles - local->GetViewAngles()) / (m_fSmooth * delta) );
+        aimAngles = local->GetViewAngles() + ((aimAngles - local->GetViewAngles()) * (m_fSmooth * delta) );
         local->SetViewAngles(aimAngles);
     }
 
@@ -98,10 +76,10 @@ namespace hacks
         return *std::ranges::min_element(visible,
         [&localPlayer](const apex_sdk::BaseEntity& first, const apex_sdk::BaseEntity& second) -> bool
         {
-            const auto aimAnglesFirst = CalcAimViewAngles(localPlayer->GetCameraPosition(),
+            const auto aimAnglesFirst = localPlayer->GetCameraPosition().ViewAngleTo(
                                                           first.GetBonePosition(8));
 
-            const auto aimAnglesSecond = CalcAimViewAngles(localPlayer->GetCameraPosition(),
+            const auto aimAnglesSecond =  localPlayer->GetCameraPosition().ViewAngleTo(
                                                            second.GetBonePosition(8));
 
             const auto fDistFirst = localPlayer->GetViewAngles().DistTo(aimAnglesFirst);

@@ -112,7 +112,7 @@ int main()
         if (localPlayer.has_value())
         for (auto const entity :apex_sdk::EntityList::GetAllEntities())
         {
-            if (!entity.IsAlive() or entity.IsKnockedout() or *localPlayer == entity or localPlayer->GetTeamNumber() == entity.GetTeamNumber())
+            if (!entity.IsAlive() or *localPlayer == entity or entity.IsKnockedout() or localPlayer->GetTeamNumber() == entity.GetTeamNumber())
                 continue;
 
             auto bottom = apex_sdk::WorldToScreen(entity.GetOrigin(), 1920, 1080);
