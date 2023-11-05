@@ -12,6 +12,7 @@
 #include "hacks/Aimbot.h"
 #include <X11/Xlib.h>
 #include <X11/keysym.h>
+#include <thread>
 
 bool IsInsertPressed() {
     static Display* display = nullptr;
@@ -47,6 +48,15 @@ bool IsInsertPressed() {
 int main()
 {
 
+    std::thread([]
+    {
+        while(true)
+        {
+            hacks::Aimbot().Run();
+        }
+    }).detach();
+
+
     glfwInit();
 
     glfwWindowHint(GLFW_FLOATING,                true);
@@ -78,8 +88,6 @@ int main()
     {
         glfwPollEvents();
 
-        hacks::Aimbot().Run();
-
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
@@ -93,6 +101,10 @@ int main()
         if (showMenu)
         {
             ImGui::Begin("kittenhook");
+            {
+                ImGui::InputFloat("Smooth", &hacks::Aimbot::m_fSmooth);
+                ImGui::InputFloat("Fov", &hacks::Aimbot::m_fFov);
+            }
             ImGui::End();
         }
 

@@ -38,7 +38,7 @@ namespace apex_sdk
     {
         std::vector<BaseEntity> entities;
 
-        for (int i = 0; i < 60; i++)
+        for (int i = 0; i < 130; i++)
         {
             auto ent = GetEntity(i);
 

@@ -51,7 +51,10 @@ namespace apex_sdk
 
     bool BaseEntity::IsAlive() const
     {
-        return !Memory::Get().ReadMemory<bool>(m_pHandle+OFFSET_LIFE_STATE).value();
+        const auto health = GetHealth();
+
+        return !Memory::Get().ReadMemory<bool>(m_pHandle+OFFSET_LIFE_STATE).value() and health > 0
+        and health <= 100;
     }
 
     bool BaseEntity::IsKnockedout() const

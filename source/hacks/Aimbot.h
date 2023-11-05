@@ -25,8 +25,8 @@ namespace hacks
         void Run();
         std::optional<apex_sdk::BaseEntity> GetTheBestTarget();
         static std::vector<apex_sdk::BaseEntity> GetAliveNotKnockedOutEnemies();
-        float m_fSmooth = 8.f;
-        float m_fFov = 5.f;
+        static float m_fSmooth;
+        static float m_fFov;
     };
 
 } // hacks

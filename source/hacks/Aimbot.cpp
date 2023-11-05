@@ -9,6 +9,7 @@
 #include <apex_sdk/EntityList.h>
 #include <algorithm>
 #include <ranges>
+#include <chrono>
 
 bool isRightButtonPressed() {
     static Display* display = nullptr;
@@ -58,8 +59,13 @@ uml::Vector3 CalcAimViewAngles(const uml::Vector3& origin, const uml::Vector3& t
 
 namespace hacks
 {
+    float Aimbot::m_fFov = 5.f;
+    float Aimbot::m_fSmooth = 10.f;
+
     void Aimbot::Run()
     {
+        const auto start = std::chrono::high_resolution_clock::now();
+
         auto target = GetTheBestTarget();
         auto local = apex_sdk::EntityList::GetLocalPlayer();
 
@@ -70,9 +76,12 @@ namespace hacks
             return;
 
         auto aimAngles = CalcAimViewAngles(local->GetCameraPosition(), target->GetBonePosition(5));
-        aimAngles = local->GetViewAngles() + ((aimAngles - local->GetViewAngles()) / m_fSmooth);
-        if ((aimAngles-local->GetViewAngles()).Length2D() <= m_fFov)
-            local->SetViewAngles(aimAngles);
+
+        if (local->GetViewAngles().DistTo(aimAngles) > m_fFov)
+            return;
+        const auto delta = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - start).count() / 1000.f;
+        aimAngles = local->GetViewAngles() + ((aimAngles - local->GetViewAngles()) / (m_fSmooth * delta) );
+        local->SetViewAngles(aimAngles);
     }
 
     std::optional<apex_sdk::BaseEntity> Aimbot::GetTheBestTarget()
