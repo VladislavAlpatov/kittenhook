@@ -94,4 +94,14 @@ namespace apex_sdk
     {
         return Memory::Get().ReadMemory<uintptr_t>(m_pHandle).value();
     }
+
+    uml::Vector3 BaseEntity::GetVelocity() const
+    {
+        return Memory::Get().ReadMemory<uml::Vector3>(m_pHandle+OFFSET_ABS_VELOCITY).value();
+    }
+
+    int BaseEntity::GetFlags() const
+    {
+        return Memory::Get().ReadMemory<int>(m_pHandle+0xc8).value();;
+    }
 }

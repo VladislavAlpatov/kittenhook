@@ -36,7 +36,7 @@ namespace apex_sdk
         [[nodiscard]] uml::Vector3 GetBonePosition(int iBone) const;
         [[nodiscard]] uml::Vector3 GetCameraPosition() const;
         [[nodiscard]] uml::Vector3 GetViewAngles() const;
-        [[nodiscard]] uml::Vector3 GetVel() const;
+        [[nodiscard]] uml::Vector3 GetVelocity() const;
         [[nodiscard]] uml::Vector3 GetBreathAngle() const;
         [[nodiscard]] uml::Vector3 GetAimPunch() const;
 

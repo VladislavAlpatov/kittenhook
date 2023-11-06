@@ -97,18 +97,18 @@ int main()
             showMenu = !showMenu;
             glfwSetWindowAttrib(window, GLFW_MOUSE_PASSTHROUGH, !glfwGetWindowAttrib(window, GLFW_MOUSE_PASSTHROUGH));
         }
-
+        auto localPlayer = apex_sdk::EntityList::GetLocalPlayer();
         if (showMenu)
         {
             ImGui::Begin("kittenhook");
             {
+                ImGui::Text("%d", localPlayer->GetFlags());
                 ImGui::InputFloat("Smooth", &hacks::Aimbot::m_fSmooth);
                 ImGui::InputFloat("Fov", &hacks::Aimbot::m_fFov);
             }
             ImGui::End();
         }
 
-        auto localPlayer = apex_sdk::EntityList::GetLocalPlayer();
         if (localPlayer.has_value())
         for (auto const entity :apex_sdk::EntityList::GetAllEntities())
         {

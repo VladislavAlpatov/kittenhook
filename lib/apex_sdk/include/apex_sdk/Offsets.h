@@ -40,7 +40,7 @@
 #define OFFSET_MATRIX 0x11a350 //ViewMatrix
 #define OFFSET_RENDER 0x741f0a8 //ViewRender displays ESp, heath dist names etc
 
-#define OFFSET_WEAPON 0x1954 //m_latestPrimaryWeapons
-#define OFFSET_BULLET_SPEED 0x19c8 + 0x04d4 //CWeaponX!m_flProjectileSpeed maybe its WeaponSettings.projectile_launch_speed now
-#define OFFSET_BULLET_SCALE 0x19c8 + 0x04dc //CWeaponX!m_flProjectileScale maybe its WeaponSettings.projectile_gravity_scale now
+#define OFFSET_WEAPON 0x1964 //m_latestPrimaryWeapons
+#define OFFSET_BULLET_SPEED 0x19e8 + 0x04d4 //CWeaponX!m_flProjectileSpeed maybe its WeaponSettings.projectile_launch_speed now
+#define OFFSET_BULLET_SCALE 0x19e8 + 0x04dc //CWeaponX!m_flProjectileScale maybe its WeaponSettings.projectile_gravity_scale now
 #define OFFSET_AMMO 0x1574 //m_ammoInClip first offset

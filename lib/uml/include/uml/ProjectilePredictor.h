@@ -21,7 +21,8 @@ namespace uml::prediction
                                                           const Vector3& targetVelocity,
                                                           float gravity,
                                                           float bulletSpeed,
-                                                          float bulletGravity);
+                                                          float bulletGravity,
+                                                          bool inAir);
 
     private:
         [[nodiscard]]

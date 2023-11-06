@@ -5,11 +5,11 @@
 #include "Aimbot.h"
 #include <apex_sdk/BaseEntity.h>
 #include <X11/Xlib.h>
-#include <cmath>
 #include <apex_sdk/EntityList.h>
 #include <algorithm>
 #include <ranges>
 #include <chrono>
+#include <apex_sdk/ProjectilePrediction.h>
 
 bool isRightButtonPressed() {
     static Display* display = nullptr;
@@ -53,13 +53,15 @@ namespace hacks
         if (!target or !local)
             return;
 
-        auto aimAngles = local->GetCameraPosition().ViewAngleTo(target->GetBonePosition(5));
+        auto aimAngles = apex_sdk::ProjectilePrediction::CalculateViewAngles(*local, *target);
 
-        if (local->GetViewAngles().DistTo(aimAngles) > m_fFov)
+        if (!aimAngles or local->GetViewAngles().DistTo(*aimAngles) > m_fFov)
             return;
+
         const auto delta = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - start).count() / 1000.f;
-        aimAngles = local->GetViewAngles() + ((aimAngles - local->GetViewAngles()) * (m_fSmooth * delta) );
-        local->SetViewAngles(aimAngles);
+        if (m_fSmooth >= 1.f)
+            aimAngles = local->GetViewAngles() + ((*aimAngles - local->GetViewAngles()) * (m_fSmooth * delta) );
+        local->SetViewAngles(*aimAngles);
     }
 
     std::optional<apex_sdk::BaseEntity> Aimbot::GetTheBestTarget()
