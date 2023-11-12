@@ -1,3 +1,5 @@
+#include <QApplication>
+#include <QLabel>
 
 #include "memory_manager/MemoryManager.h"
 #include "apex_sdk/BaseEntity.h"
@@ -14,14 +16,17 @@
 #include <X11/keysym.h>
 #include <thread>
 
+#include "gui/menu/Menu.h"
+
+
 bool IsInsertPressed() {
     static Display* display = nullptr;
     static Window root;
     static bool prevInsertState = false;  // Keeps track of the previous state
 
     if (display == nullptr) {
-        display = XOpenDisplay(NULL);
-        if (display == NULL) {
+        display = XOpenDisplay(nullptr);
+        if (display == nullptr) {
             return false;
         }
         root = DefaultRootWindow(display);
@@ -45,8 +50,14 @@ bool IsInsertPressed() {
     return pressedNow;
 }
 
-int main()
+int main(int argc, char *argv[])
 {
+    QApplication app(argc, argv);
+
+    // auto menu = ktth::menu::Menu();
+   // menu.show();
+
+    // app.exec();
 
     std::thread([]
     {
@@ -102,7 +113,6 @@ int main()
         {
             ImGui::Begin("kittenhook");
             {
-                ImGui::Text("%d", localPlayer->GetFlags());
                 ImGui::InputFloat("Smooth", &hacks::Aimbot::m_fSmooth);
                 ImGui::InputFloat("Fov", &hacks::Aimbot::m_fFov);
             }

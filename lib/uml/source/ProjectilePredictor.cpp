@@ -21,7 +21,7 @@ namespace uml::prediction
                                              bool inAir)
     {
         constexpr float maxTime = 3.0f;
-        constexpr float timeStep = 0.1f;
+        constexpr float timeStep = 0.01f;
 
         for (float time = 0.0f; time <= maxTime; time += timeStep)
         {

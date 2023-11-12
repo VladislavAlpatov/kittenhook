@@ -23,3 +23,6 @@ target_link_libraries(kittenhook PRIVATE ${OPENGL_LIBRARIES})
 
 find_package(X11 REQUIRED)
 target_link_libraries(kittenhook PRIVATE ${X11_LIBRARIES})
+
+find_package(Qt6Widgets REQUIRED)
+target_link_libraries(kittenhook PRIVATE Qt6::Widgets)

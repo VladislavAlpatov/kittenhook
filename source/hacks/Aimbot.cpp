@@ -59,7 +59,7 @@ namespace hacks
             return;
 
         const auto delta = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - start).count() / 1000.f;
-        if (m_fSmooth >= 1.f)
+        if (m_fSmooth < 1.f)
             aimAngles = local->GetViewAngles() + ((*aimAngles - local->GetViewAngles()) * (m_fSmooth * delta) );
         local->SetViewAngles(*aimAngles);
     }
