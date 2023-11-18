@@ -6,6 +6,8 @@
 #include <QWidget>
 
 class QMouseEvent;
+class QBoxLayout;
+
 
 namespace ktth::menu
 {
@@ -20,8 +22,11 @@ namespace ktth::menu
         void mousePressEvent(QMouseEvent* event) override;
         void mouseReleaseEvent(QMouseEvent* event) override;
         void mouseMoveEvent(QMouseEvent* event) override;
+
     private:
         bool m_canDrag = false;
         QPoint m_dragPosition;
+
+        void InputFloat(const std::string& str, float* val, QBoxLayout* layout = nullptr);
     };
 } // ktth

@@ -8,6 +8,13 @@ add_executable(kittenhook source/main.cpp)
 add_subdirectory(lib)
 add_subdirectory(extlib)
 add_subdirectory(source)
+
+target_include_directories(kittenhook PRIVATE source)
+
+if (CMAKE_BUILD_TYPE MATCHES Release)
+    target_compile_options(kittenhook PRIVATE -O3)
+endif()
+
 target_include_directories(kittenhook PRIVATE extlib/GLFW3/include)
 target_link_directories(kittenhook PRIVATE extlib/GLFW3/lib)
 

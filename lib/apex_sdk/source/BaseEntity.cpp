@@ -104,4 +104,9 @@ namespace apex_sdk
     {
         return Memory::Get().ReadMemory<int>(m_pHandle+0xc8).value();;
     }
+
+    uml::Vector3 BaseEntity::GetBreathAngle() const
+    {
+        return Memory::Get().ReadMemory<uml::Vector3>(m_pHandle+OFFSET_BREATH_ANGLES).value();
+    }
 }

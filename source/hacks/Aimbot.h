@@ -5,6 +5,7 @@
 #pragma once
 #include <optional>
 #include <vector>
+#include "uml/Vector3.h"
 
 namespace apex_sdk
 {
@@ -27,6 +28,8 @@ namespace hacks
         static std::vector<apex_sdk::BaseEntity> GetAliveNotKnockedOutEnemies();
         static float m_fSmooth;
         static float m_fFov;
+    private:
+        uml::Vector3 oldBreathAngle;
     };
 
 } // hacks

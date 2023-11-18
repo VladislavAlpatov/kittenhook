@@ -23,6 +23,7 @@
 #define OFFSET_SIGN_NAME 0x04b0 //m_iSignifierName
 #define OFFSET_ABS_VELOCITY 0x0170 //m_vecAbsVelocity
 #define OFFSET_VISIBLE_TIME 0x19C0 //CPlayer!lastVisibleTime
+#define OFFSET_BREATH_ANGLES  OFFSET_VIEWANGLES - 0x10
 
 #define OFFSET_LIFE_STATE 0x06c8 //m_lifeState, >0 = dead
 #define OFFSET_BLEED_OUT_STATE 0x2710 //m_bleedoutState, >0 = knocked
@@ -33,6 +34,7 @@
 #define OFFSET_AIMPUNCH 0x23f8 //m_currentFrameLocalPlayer.m_vecPunchWeapon_Angle, first one
 #define OFFSET_CAMERAPOS 0x1f00 //CPlayer!camera_origin
 #define OFFSET_VIEWANGLES 0x2564 - 0x14 //m_ammoPoolCapacity - 0x14
+#define OFFSET_BREATH_ANGLES  OFFSET_VIEWANGLES - 0x10
 #define OFFSET_BREATH_ANGLES OFFSET_VIEWANGLES - 0x10
 #define OFFSET_OBSERVER_MODE 0x3454 //m_iObserverMode
 #define OFFSET_OBSERVING_TARGET 0x3460 //m_hObserverTarget
