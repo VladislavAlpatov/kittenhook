@@ -66,7 +66,6 @@ namespace ktth::overlay
                                                        1920,
                                                        1080);
 
-
                     if (!top or !bottom)
                         continue;
 

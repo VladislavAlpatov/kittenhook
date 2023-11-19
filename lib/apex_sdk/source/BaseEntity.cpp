@@ -13,9 +13,9 @@ namespace apex_sdk
         return Memory::Get().ReadMemory<int>(m_pHandle+OFFSET_HEALTH).value();
     }
 
-    int BaseEntity::GetSheildValue() const
+    int BaseEntity::GetShieldValue() const
     {
-        return Memory::Get().ReadMemory<int>(m_pHandle+OFFSET_AMMO).value();
+        return Memory::Get().ReadMemory<int>(m_pHandle+OFFSET_SHIELD).value();
     }
 
     uml::Vector3 BaseEntity::GetOrigin() const
@@ -108,5 +108,10 @@ namespace apex_sdk
     uml::Vector3 BaseEntity::GetBreathAngle() const
     {
         return Memory::Get().ReadMemory<uml::Vector3>(m_pHandle+OFFSET_BREATH_ANGLES).value();
+    }
+
+    int BaseEntity::GetMaxShieldValue() const
+    {
+        return Memory::Get().ReadMemory<int>(m_pHandle+OFFSET_MAXSHIELD).value();
     }
 }
