@@ -3,6 +3,7 @@
 //
 #include "apex_sdk/WorldToScreen.h"
 #include "apex_sdk/MemoryManagerSinglton.h"
+#include "apex_sdk/Offsets.h"
 
 namespace apex_sdk
 {
@@ -30,7 +31,7 @@ namespace apex_sdk
 
         static const auto base = Memory::Get().GetModuleBaseAddressByName("r5apex.exe").value();
 
-        static const uintptr_t viewRender = mm.ReadMemory<uintptr_t>(base+0x73828A0).value();
+        static const uintptr_t viewRender = mm.ReadMemory<uintptr_t>(base+OFFSET_RENDER).value();
         static const uintptr_t pViewMatrix = mm.ReadMemory<uintptr_t>(viewRender+0x11a350).value();
 
 

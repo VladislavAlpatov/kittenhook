@@ -4,8 +4,8 @@
 
 #pragma once
 
-#define OFFSET_ENTITYLIST 0x1D6B5D8 //cl_entitylist
-#define OFFSET_LOCAL_ENT 0x2119848  //LocalPlayer might be moved to AVC_GameMovement
+#define OFFSET_ENTITYLIST 0x1D71858 //cl_entitylist
+#define OFFSET_LOCAL_ENT 0x211FAC8  //LocalPlayer might be moved to AVC_GameMovement
 #define OFFSET_NAME_LIST 0xc264a60 //NameList
 #define OFFSET_GLOBAL_VARS      0x16f4d20
 
@@ -30,8 +30,6 @@
 
 #define OFFSET_ORIGIN 0x017c //m_vecAbsOrigin - 3rd offset after the first int and vector
 #define OFFSET_BONES 0x0dd0 + 0x48 //m_nForceBone + 0x48
-#define OFFSET_STUDIOHDR 0x1020 //CBaseAnimating!m_pStudioHdr
-#define OFFSET_AIMPUNCH 0x23f8 //m_currentFrameLocalPlayer.m_vecPunchWeapon_Angle, first one
 #define OFFSET_CAMERAPOS 0x1f00 //CPlayer!camera_origin
 #define OFFSET_VIEWANGLES 0x2564 - 0x14 //m_ammoPoolCapacity - 0x14
 #define OFFSET_BREATH_ANGLES  OFFSET_VIEWANGLES - 0x10
@@ -40,7 +38,7 @@
 #define OFFSET_OBSERVING_TARGET 0x3460 //m_hObserverTarget
 
 #define OFFSET_MATRIX 0x11a350 //ViewMatrix
-#define OFFSET_RENDER 0x741f0a8 //ViewRender displays ESp, heath dist names etc
+#define OFFSET_RENDER 0x7389D40 //ViewRender displays ESp, heath dist names etc
 
 #define OFFSET_WEAPON 0x1964 //m_latestPrimaryWeapons
 #define OFFSET_BULLET_SPEED 0x19e8 + 0x04d4 //CWeaponX!m_flProjectileSpeed maybe its WeaponSettings.projectile_launch_speed now
