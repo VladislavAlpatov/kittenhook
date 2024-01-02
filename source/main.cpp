@@ -4,8 +4,6 @@
 #include "gui/overlay/Overlay.h"
 #include "gui/menu/Menu.h"
 #include "hacks/Aimbot.h"
-#include <apex_sdk/Controller.h>
-#include <iostream>
 
 int main(int argc, char *argv[])
 {
