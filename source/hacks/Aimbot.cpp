@@ -27,7 +27,7 @@ bool isRightButtonPressed() {
     }
 
     if (XQueryPointer(display, root, &root_return, &child_return, &root_x_return, &root_y_return, &win_x_return, &win_y_return, &mask_return)) {
-        if (mask_return & Button3Mask) { // Button3Mask indicates the right button
+        if (mask_return & Button1Mask) { // Button3Mask indicates the right button
             return true;
         }
     }
@@ -39,7 +39,7 @@ namespace hacks
 {
     float Aimbot::m_fFov = 5.f;
     float Aimbot::m_fSmooth = 1.f;
-
+    bool Aimbot::m_bEnabled = false;
     void Aimbot::Run()
     {
         const auto start = std::chrono::high_resolution_clock::now();
@@ -47,7 +47,7 @@ namespace hacks
         auto target = GetTheBestTarget();
         auto local = apex_sdk::EntityList::GetLocalPlayer();
 
-        if (!isRightButtonPressed())
+        if (!isRightButtonPressed() || !m_bEnabled)
             return;
 
         if (!target or !local)

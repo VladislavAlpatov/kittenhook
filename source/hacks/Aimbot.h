@@ -28,6 +28,7 @@ namespace hacks
         static std::vector<apex_sdk::BaseEntity> GetAliveNotKnockedOutEnemies();
         static float m_fSmooth;
         static float m_fFov;
+        static bool m_bEnabled;
     private:
         uml::Vector3 oldBreathAngle;
     };

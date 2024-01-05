@@ -12,6 +12,9 @@
 #include <QVBoxLayout>
 #include <QMouseEvent>
 #include <QDoubleSpinBox>
+#include <QGroupBox>
+#include <QToolTip>
+
 
 #include "hacks/Aimbot.h"
 
@@ -32,15 +35,22 @@ namespace ktth::menu
         label->setAlignment(Qt::AlignHCenter);
         layout->addWidget(label);
 
-        auto checkBox = new QCheckBox("AimBot", this);
-        layout->addWidget(checkBox);
+        auto* groupBox = new QGroupBox(tr("Automatic Target Acquisition"));
+        auto* vbox = new QVBoxLayout;
 
-        InputFloat("Aimbot fov", &hacks::Aimbot::m_fFov, layout);
-        InputFloat("Aimbot smooth", &hacks::Aimbot::m_fSmooth, layout);
+
+        auto checkBox = new QCheckBox("Enabled", this);
+
+
+        vbox->addWidget(checkBox);
+        InputFloat("Field Of View", &hacks::Aimbot::m_fFov, vbox);
+        InputFloat("Smooth Factor", &hacks::Aimbot::m_fSmooth, vbox);
         // Connect the checkbox's stateChanged signal
         connect(checkBox, &QCheckBox::stateChanged, [&](int state){
-            qDebug() << "Checkbox state changed to:" << (state == Qt::Checked ? "Checked" : "Unchecked");
+            hacks::Aimbot::m_bEnabled = state == Qt::Checked;
         });
+        layout->addWidget(groupBox);
+        groupBox->setLayout(vbox);
 
         setLayout(layout);
     }
@@ -55,6 +65,7 @@ namespace ktth::menu
 
         event->accept();
     }
+
 
     void Menu::mouseReleaseEvent(QMouseEvent* event)
     {

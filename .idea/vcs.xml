@@ -2,6 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/lib/uml" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/extlib/apex-sdk" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/extlib/apex-sdk/extlibs/memory_manager" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/extlib/apex-sdk/extlibs/uml" vcs="Git" />
   </component>
 </project>
