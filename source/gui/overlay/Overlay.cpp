@@ -74,7 +74,7 @@ namespace ktth::overlay
 
             auto localPlayer = apex_sdk::EntityList::GetLocalPlayer();
             if (localPlayer.has_value())
-                for (auto const entity :apex_sdk::EntityList::GetAllEntities())
+                for (auto const entity : apex_sdk::EntityList::GetAllEntities())
                 {
                     if (!entity.IsAlive() or *localPlayer == entity or entity.IsKnockedout() or localPlayer->GetTeamNumber() == entity.GetTeamNumber())
                         continue;
