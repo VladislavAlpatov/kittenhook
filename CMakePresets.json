@@ -6,8 +6,7 @@
       "hidden": true,
       "binaryDir": "${sourceDir}/cmake-build/build/${presetName}",
       "installDir": "${sourceDir}/cmake-build/install/${presetName}",
-      "cacheVariables": {
-      }
+      "cacheVariables": {}
     },
     {
       "name": "x64-debug",
@@ -18,7 +17,8 @@
         "strategy": "external"
       },
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug"
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/out/Debug"
       }
     },
     {
@@ -26,7 +26,8 @@
       "displayName": "Release",
       "inherits": "x64-debug",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/out/Release"
       }
     }
   ]
